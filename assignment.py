@@ -53,7 +53,7 @@ def kinetic_energy(m: Q[u.kg], v: Q[u.m/u.s]) -> Q[u.J]:
     """
     return 0.5*m*v**2
 
-
+@u.quantity_input(y0="length", t="time", v0="speed")
 def free_fall_height(
     y0: Q[u.m],
     t: Q[u.s],
@@ -61,8 +61,24 @@ def free_fall_height(
     g: Q[u.m/u.s**2] = EARTH_GRAVITY,
 ) -> Q[u.m]:
     """Return the height of an object in vertical motion.
+
+    Parameters
+    ----------
+    y0 : Quantity['length']
+        Initial height of the object.
+    t : Quantity['time']
+        Elapsed time over which the object is in vertical motion.
+    v0 : Quantity['speed']
+        Initial velocity of the object.
+    g : Quantity['acceleration']
+        Earth's gravitational acceleration.
+
+    Returns
+    -------
+    Quantity['length']
+        Final height computed from $y0 + v0 t + \frac{1}{2} a t^2$.
     """
-    raise NotImplementedError("Implement free_fall_height")
+    return y0 + v0*t - 0.5*g*t**2
 
 
 
