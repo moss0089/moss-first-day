@@ -33,6 +33,7 @@ def distance_traveled(v0: Q[u.m/u.s], a: Q[u.m/u.s**2], t: Q[u.s]) -> Q[u.m]:
     Quantity['length']
         Displacement computed from $v_0 t + \frac{1}{2} a t^2$.
     """
+    
     raise NotImplementedError("Implement distance_traveled")
 
 
