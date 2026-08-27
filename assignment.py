@@ -81,11 +81,25 @@ def free_fall_height(
     return y0 + v0*t - 0.5*g*t**2
 
 
-
-def projectile_range(v0, th0, g = EARTH_GRAVITY):
+@u.quantity_input(v0='speed', th0='angle')
+def projectile_range(v0: Q[u.m/u.s], th0: Q[u.rad], g: Q[u.m/u.s**2] = EARTH_GRAVITY) -> Q[u.m]:
     """Return the ideal range of a projectile launched and landing at the same height.
+
+    Parameters
+    ----------
+    v0 : Quantity['speed']
+        Initial speed of the projectile.
+    th0 : Quantity['angle']
+        Initial launch angle.
+    g : Quantity['acceleration']
+        Earth's gravitational acceleration.
+
+    Returns
+    -------
+    Quantity['length']
+        Ideal range computed from $\frac{v0^2 sin(2 (th0))}{g}$.
     """
-    raise NotImplementedError("Implement projectile_range")
+    return (v0**2 * np.sin(2*th0))/g
 
 
 def quadratic_solver(a: float, b, c) -> tuple[float, float]:
