@@ -102,7 +102,21 @@ def projectile_range(v0: Q[u.m/u.s], th0: Q[u.rad], g: Q[u.m/u.s**2] = EARTH_GRA
     return (v0**2 * np.sin(2*th0))/g
 
 
-def quadratic_solver(a: float, b, c) -> tuple[float, float]:
+def quadratic_solver(a: float, b: float, c: float) -> tuple[float, float]:
     """Return the two roots of a quadratic equation.
+
+    Parameters
+    ----------
+    a : Quantity['coefficient']
+        Numerical coefficient of the $x^2$ term.
+    b : Quantity['coefficient']
+        Numerical coefficient of the $x$ term.
+    c : Quantity['coefficient']
+        The constant term.
+
+    Returns
+    -------
+    Quantity['roots']
+        Roots computed by creating a rank-1 array of the parameters, then array was used as an argument for the method 'np.roots()'.
     """
-    raise NotImplementedError("Implement quadratic_solver")
+    return tuple((np.roots(np.array([a, b, c]))))
